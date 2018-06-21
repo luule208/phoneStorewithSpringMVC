@@ -1,8 +1,7 @@
-package com.tma.intern.luule.phonestore.Controller;
+package com.tma.intern.luule.phonestore.controller;
 
 
 import com.tma.intern.luule.phonestore.model.Bill;
-import com.tma.intern.luule.phonestore.model.Phone;
 import com.tma.intern.luule.phonestore.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +23,7 @@ public class BillController {
 
 
  @RequestMapping(method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
-    public ResponseEntity<List<Bill>> listall() {
+    public ResponseEntity<List<Bill>> listall() throws Exception{
 
         List<Bill> bill = billService.findAll();
 
@@ -34,13 +33,15 @@ public class BillController {
         return new ResponseEntity<List<Bill>>(bill, HttpStatus.OK);
     }
 
+
     @RequestMapping(params = "name",method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
-    public ResponseEntity<List<Bill>> listall(@RequestParam("name") String name) {
+    public ResponseEntity<List<Bill>> listall(@RequestParam("name") String name)throws Exception {
 
         List<Bill> bill = billService.findAllbyName(name);
 
         if (bill.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            //return new ResponseEntity(HttpStatus.NOT_FOUND);
+            throw new Exception();
         }
         return new ResponseEntity<List<Bill>>(bill, HttpStatus.OK);
     }

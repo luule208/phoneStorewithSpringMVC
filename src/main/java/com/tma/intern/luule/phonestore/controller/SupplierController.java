@@ -1,4 +1,4 @@
-package com.tma.intern.luule.phonestore.Controller;
+package com.tma.intern.luule.phonestore.controller;
 
 
 import com.tma.intern.luule.phonestore.model.Supplier;
@@ -6,7 +6,6 @@ import com.tma.intern.luule.phonestore.service.SupplierService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -67,16 +66,16 @@ public class SupplierController {
         logger.info("Updating Supplier with id {}", id);
         Supplier supplier = supplierService.findById(id);
         if (supplier == null) {
-            logger.error("Unable to update. Supplier with id {} not found.", id);
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        } else {
-            supplier.setName(Details.getName());
-            supplierService.addSupplier(supplier);
-            return new ResponseEntity<>(supplier, HttpStatus.OK);
-
+           logger.error("Unable to update. Supplier with id {} not found.", id);
+           return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+        else {
+           supplier.setName(Details.getName());
+            supplierService.addSupplier(supplier);
 
-    }
+           }
+        return new ResponseEntity<>(supplier, HttpStatus.OK);
+         }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> deletePhone(@PathVariable(value = "id") Integer Id) {

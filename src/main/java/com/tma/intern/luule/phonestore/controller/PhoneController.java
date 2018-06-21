@@ -1,9 +1,7 @@
-package com.tma.intern.luule.phonestore.Controller;
+package com.tma.intern.luule.phonestore.controller;
 
 import com.tma.intern.luule.phonestore.model.Phone;
-import com.tma.intern.luule.phonestore.service.BillService;
 import com.tma.intern.luule.phonestore.service.PhoneService;
-import com.tma.intern.luule.phonestore.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
