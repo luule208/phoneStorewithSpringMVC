@@ -13,7 +13,8 @@ public interface PhoneRepository extends JpaRepository<Phone, Integer> {
     Phone findAllById(Integer id);
 
     List<Phone> findAllByName(String Name);
-    List<Phone> findByDescriptionAndName(String description,String name );
+
+    List<Phone> findByDescriptionAndName(String description, String name);
 
     @Query(value = "SELECT * FROM phones where description = ?1 ", nativeQuery = true)
     List<Phone> findAllByNativeQueryforDescription(String description);

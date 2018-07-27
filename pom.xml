@@ -18,6 +18,7 @@
         <!-- SPRING & HIBERNATE / JPA -->
         <spring.version>5.0.6.RELEASE</spring.version>
         <spring.data.jpa.version>2.0.7.RELEASE</spring.data.jpa.version>
+        <spring.security.version>5.0.2.RELEASE</spring.security.version>
         <hibernate.version>5.2.1.Final</hibernate.version>
     </properties>
 
@@ -141,7 +142,34 @@
             <version>1.6.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>4.20</version>
+        </dependency>
 
     </dependencies>
 

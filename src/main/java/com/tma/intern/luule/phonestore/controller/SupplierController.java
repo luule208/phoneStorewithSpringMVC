@@ -61,21 +61,20 @@ public class SupplierController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Accept=application/json", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> updatePhone(@PathVariable(value = "id") Integer id, @RequestBody Supplier Details){
+    public ResponseEntity<?> updatePhone(@PathVariable(value = "id") Integer id, @RequestBody Supplier Details) {
 
         logger.info("Updating Supplier with id {}", id);
         Supplier supplier = supplierService.findById(id);
         if (supplier == null) {
-           logger.error("Unable to update. Supplier with id {} not found.", id);
-           return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-        else {
-           supplier.setName(Details.getName());
+            logger.error("Unable to update. Supplier with id {} not found.", id);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        } else {
+            supplier.setName(Details.getName());
             supplierService.addSupplier(supplier);
 
-           }
+        }
         return new ResponseEntity<>(supplier, HttpStatus.OK);
-         }
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> deletePhone(@PathVariable(value = "id") Integer Id) {

@@ -17,7 +17,7 @@ public interface BillService {
 
     public List<Bill> findAllbyName(String name);
 
-    List<Bill> findByJPQLQueryforPrice( Long price );
+    List<Bill> findByJPQLQueryforPrice(Long price);
 
 
 }

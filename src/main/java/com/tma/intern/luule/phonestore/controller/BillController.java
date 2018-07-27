@@ -22,8 +22,8 @@ public class BillController {
     private BillService billService;
 
 
- @RequestMapping(method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
-    public ResponseEntity<List<Bill>> listall() throws Exception{
+    @RequestMapping(method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
+    public ResponseEntity<List<Bill>> listall() throws Exception {
 
         List<Bill> bill = billService.findAll();
 
@@ -34,8 +34,8 @@ public class BillController {
     }
 
 
-    @RequestMapping(params = "name",method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
-    public ResponseEntity<List<Bill>> listall(@RequestParam("name") String name)throws Exception {
+    @RequestMapping(params = "name", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
+    public ResponseEntity<List<Bill>> listall(@RequestParam("name") String name) throws Exception {
 
         List<Bill> bill = billService.findAllbyName(name);
 
@@ -92,7 +92,7 @@ public class BillController {
 
     }
 
-    @RequestMapping(params = {"price"},method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
+    @RequestMapping(params = {"price"}, method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
     public ResponseEntity<List<Bill>> listall(@RequestParam("price") Long price) {
 
         List<Bill> bills = billService.findByJPQLQueryforPrice(price);
@@ -103,10 +103,5 @@ public class BillController {
         return new ResponseEntity<>(bills, HttpStatus.OK);
     }
 
-    //@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json", consumes = "application/json", produces = "application/json")
-    //public ResponseEntity<?> creBill(@RequestBody Bill bill,@RequestBody Phone phone ) {
-        //logger.info("Creating a Bill : {}", bill);
-     //   return new ResponseEntity<Phone>(billService.addBillAndPhone(phone,phone), HttpStatus.CREATED);
-    //}
 
 }

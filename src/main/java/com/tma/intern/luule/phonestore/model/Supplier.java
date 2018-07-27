@@ -16,8 +16,7 @@ import java.util.Set;
 public class Supplier implements Serializable {
 
 
-    private static final long serialVersionUID = 740882977243918711L;
-
+    private static final long serialVersionUID = -3070715424194980331L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
@@ -56,5 +55,14 @@ public class Supplier implements Serializable {
 
     public void setPhones(Set<Phone> phones) {
         this.phones = phones;
+    }
+
+    @Override
+    public String toString() {
+        return "Supplier{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phones=" + phones +
+                '}';
     }
 }

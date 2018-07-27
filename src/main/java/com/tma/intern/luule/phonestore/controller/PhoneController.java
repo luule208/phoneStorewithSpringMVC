@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,7 @@ public class PhoneController {
 
     @Autowired
     private PhoneService phoneService;
+
 
     @RequestMapping(method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
     public ResponseEntity<List<Phone>> listall() {
@@ -48,7 +50,7 @@ public class PhoneController {
 
     }
 
-    @RequestMapping(params = {"description"},method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
+    @RequestMapping(params = {"description"}, method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
     public ResponseEntity<List<Phone>> listall(@RequestParam("description") String description) {
 
         List<Phone> phones = phoneService.findAllByNativeQueryforDescription(description);
@@ -59,10 +61,10 @@ public class PhoneController {
         return new ResponseEntity<>(phones, HttpStatus.OK);
     }
 
-    @RequestMapping(params = {"description","name"},method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
-    public ResponseEntity<List<Phone>> listall(@RequestParam("description") String description ,@RequestParam("name") String name) {
+    @RequestMapping(params = {"description", "name"}, method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
+    public ResponseEntity<List<Phone>> listall(@RequestParam("description") String description, @RequestParam("name") String name) {
 
-        List<Phone> phones = phoneService.findByDescriptionAndName(description,name);
+        List<Phone> phones = phoneService.findByDescriptionAndName(description, name);
 
         if (phones.isEmpty()) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -122,8 +124,8 @@ public class PhoneController {
         }
     }
 
-    @RequestMapping(method=RequestMethod.GET)
-    public ResponseEntity<Page<Phone>> list(Pageable pageable){
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Page<Phone>> list(Pageable pageable) {
         Page<Phone> phones = phoneService.listAllByPage(pageable);
 
         return new ResponseEntity<>(phones, HttpStatus.OK);

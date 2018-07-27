@@ -35,8 +35,8 @@ public class PhoneServiceImpl implements PhoneService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Phone> findByDescriptionAndName(String description,String name ) {
-        return phonerepository.findByDescriptionAndName(description,name);
+    public List<Phone> findByDescriptionAndName(String description, String name) {
+        return phonerepository.findByDescriptionAndName(description, name);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class PhoneServiceImpl implements PhoneService {
         phonerepository.save(phone);
     }
 
-    public List<Phone> getPage(int pageNumber,int PAGESIZE) {
+    public List<Phone> getPage(int pageNumber, int PAGESIZE) {
         PageRequest request = new PageRequest(pageNumber - 1, PAGESIZE, Sort.Direction.DESC, "name");
         return phonerepository.findAll(request).getContent();
     }

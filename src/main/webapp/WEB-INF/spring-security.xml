@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:beans="http://www.springframework.org/schema/beans"
+			 xmlns:security="http://www.springframework.org/schema/c"
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+    <beans:bean id="restServicesEntryPoint"
+		class="com.tma.intern.luule.phonestore.controller.exception.RestAuthenticationEntryPoint" />
+
+    <beans:bean id="customAccessDeniedHandler"
+		class="com.tma.intern.luule.phonestore.controller.exception.CustomAccessDeniedHandler" />
+		
+	<beans:bean id="jwtAuthenticationFilter" class="com.tma.intern.luule.phonestore.controller.exception.JwtAuthenticationTokenFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+    </beans:bean>
+
+
+	<http pattern="/rest/login" security="none"/>
+
+	<http pattern="/**" auto-config="false" use-expressions="true"
+		create-session="stateless" entry-point-ref="restServicesEntryPoint">
+
+        <intercept-url pattern="/**" access="permitAll"/>
+		
+		<custom-filter ref="jwtAuthenticationFilter" after="BASIC_AUTH_FILTER"/>
+		<access-denied-handler ref="customAccessDeniedHandler"/>
+		<csrf disabled="true" />
+	</http>
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="myUserDetailsService"/>
+	</authentication-manager>
+
+	<beans:bean id="myUserDetailsService"
+		  class="com.tma.intern.luule.phonestore.service.impl.MyUserDetailsService"/>
+
+    <global-method-security pre-post-annotations="enabled">
+        <expression-handler ref="expressionHandler"/>
+    </global-method-security>
+    <beans:bean id="expressionHandler"
+          class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler"/>
+
+</beans:beans>

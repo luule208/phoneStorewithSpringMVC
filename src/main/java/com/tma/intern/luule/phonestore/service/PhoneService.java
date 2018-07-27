@@ -21,9 +21,9 @@ public interface PhoneService {
 
     public void addPhonev2(Phone phone);
 
-    public List<Phone> findByDescriptionAndName(String description,String name );
+    public List<Phone> findByDescriptionAndName(String description, String name);
 
-    public List<Phone> getPage(int pageNumber,int PAGESIZE);
+    public List<Phone> getPage(int pageNumber, int PAGESIZE);
 
     Page<Phone> listAllByPage(Pageable pageable);
 

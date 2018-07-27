@@ -13,10 +13,11 @@ import java.util.List;
 public interface BillRepository extends JpaRepository<Bill, Integer> {
 
     Bill findAllById(Integer id);
-    List<Bill> findAllByUsername(String name );
+
+    List<Bill> findAllByUsername(String name);
 
 
     @Query("select b from Bill b where b.price = :price ")
-    List<Bill> findJPQLQueryforPrice(@Param("price") Long price );
+    List<Bill> findJPQLQueryforPrice(@Param("price") Long price);
 
 }

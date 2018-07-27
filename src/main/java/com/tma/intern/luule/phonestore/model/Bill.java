@@ -1,5 +1,7 @@
 package com.tma.intern.luule.phonestore.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -37,6 +39,10 @@ public class Bill implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "phone_id", referencedColumnName = "id")})
     private Set<Phone> phones = new HashSet<>();
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_owner", nullable = false)
+    @JsonBackReference
+    private User owner;
 
     public Integer getId() {
         return id;
@@ -68,6 +74,14 @@ public class Bill implements Serializable {
 
     public void setPhones(Set<Phone> phones) {
         this.phones = phones;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     @Override
